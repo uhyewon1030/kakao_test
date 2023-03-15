@@ -1,6 +1,6 @@
 import {useSearchParams} from 'react-router-dom';
 import api from '../../api';
-import {useContext, useEffect, useRef} from 'react';
+import {useContext, useEffect, useRef, useState} from 'react';
 import {KakaoUserContext} from '../../context/kakaoUserContext';
 
 const { Kakao } = window;
@@ -12,6 +12,9 @@ const Redirect = () => {
     const [searchParams] = useSearchParams();
     const redirectUrl = 'http://192.168.111.145:3000/redirect';
     const {kakaoUserData, setKakaoUserData} = useContext(KakaoUserContext);
+
+    const [profile, setProfile] = useState({});
+
 
     useEffect(() => {
         if (!Kakao.isInitialized()) {
@@ -41,6 +44,7 @@ const Redirect = () => {
     const getProfile = (token) => {
         api.getProfile(token).then((res) => {
             console.log(res)
+            setProfile(res)
         }).catch((err) => {
             console.log(err)
         })
@@ -87,6 +91,10 @@ const Redirect = () => {
             <button onClick={() => {onClickFriends.api()}}>
                 친구선택 API
             </button>
+            <p>
+
+                {JSON.stringify(profile)}
+            </p>
         </>
     )
 }
