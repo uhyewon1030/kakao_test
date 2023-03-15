@@ -5,6 +5,7 @@ import {KakaoUserContext} from './context/kakaoUserContext';
 import Home from './pages/home/Home';
 import Redirect from './pages/redirect/Redirect';
 import {useState} from 'react';
+import FriendsRedirect from './pages/redirect/FriendsRedirect';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
               <Routes>
                   <Route path='/' element={<Home />} />
                   <Route path='/redirect' element={<Redirect/>} />
+                  <Route path='/friends/redirect' element={<FriendsRedirect/>} />
               </Routes>
           </Router>
       </KakaoUserContext.Provider>

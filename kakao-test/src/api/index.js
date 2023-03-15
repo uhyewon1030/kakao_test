@@ -132,13 +132,14 @@ const api = {
     },
     sendMessage: (uuids, acessToken) => {
         const param = {
-            receiver_uuids: uuids,
-            template_object: template
+            receiver_uuids: JSON.stringify(uuids),
+            template_object: JSON.stringify(template)
         }
         return new Promise((resolve, reject) => {
             kApi.post(`/v1/api/talk/friends/message/default/send`, qs.stringify(param), {
                 headers: {
-                    'Authorization': `Bearer ${acessToken}`
+                    'Authorization': `Bearer ${acessToken}`,
+                    'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then((res) => {
                 resolve(res)

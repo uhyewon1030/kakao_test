@@ -11,29 +11,11 @@ const Redirect = () => {
 
     const [searchParams] = useSearchParams();
     const redirectUrl = 'http://192.168.111.145:3000/redirect';
+    const firendRedirectUrl = 'http://192.168.111.145:3000/friends/redirect'
     const {kakaoUserData, setKakaoUserData} = useContext(KakaoUserContext);
 
 
     const [profile, setProfile] = useState({});
-
-    useEffect(() => {
-        const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-        const token = userInfo.access_token
-        if(searchParams.get('selected')){
-            const users = searchParams.get('selected').users
-            let uuids = []
-            for(let i=0; i < users.length; i++){
-                uuids.push(users[i].uuid)
-            }
-            alert(uuids)
-            api.getToken(uuids, token).then((res) => {
-                alert(res)
-            }).catch((err) => {
-                alert(err)
-            })
-        }
-    }, [])
-
 
     useEffect(() => {
         if (!Kakao.isInitialized()) {
@@ -72,7 +54,7 @@ const Redirect = () => {
     const onClickFriends = {
         script: () => {
             Kakao.Picker.selectFriends({
-                returnUrl: redirectUrl, // 필수
+                returnUrl: firendRedirectUrl, // 필수
                 title: '친구 선택',
                 maxPickableCount: 10,
                 minPickableCount: 1,
