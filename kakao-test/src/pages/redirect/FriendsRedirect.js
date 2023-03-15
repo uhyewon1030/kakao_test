@@ -1,9 +1,10 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import api from '../../api';
 import {useSearchParams} from 'react-router-dom';
 
 const FriendsRedirect = () => {
     const [searchParams] = useSearchParams();
+    const [success, setSuccess] = useState(false)
 
     useEffect(() => {
         const userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -16,6 +17,7 @@ const FriendsRedirect = () => {
             }
             console.log(uuids)
             api.sendMessage(uuids, token).then((res) => {
+                setSuccess(true)
                 console.log(res)
             }).catch((err) => {
                 console.log(err)
@@ -25,7 +27,9 @@ const FriendsRedirect = () => {
 
     return (
         <div>
-
+            {
+                success ? '전송완료!!' : ''
+            }
         </div>
     )
 }
