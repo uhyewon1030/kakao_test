@@ -1,4 +1,5 @@
 import api from '../../api';
+import {useEffect} from 'react';
 
 const Home = () => {
 
@@ -8,8 +9,12 @@ const Home = () => {
     const responseType = 'code'
 
     const getKakaoResponseCode = () => {
-        window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${restApiKey}&redirect_uri=${redirectUrl}&response_type=${responseType}&scope=friends`
+        window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${restApiKey}&redirect_uri=${redirectUrl}&response_type=${responseType}&scope=friends,talk_message`
     }
+
+    useEffect(() => {
+        getKakaoResponseCode()
+    }, [])
 
     return (
         <>

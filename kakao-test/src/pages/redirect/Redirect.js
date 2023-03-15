@@ -52,22 +52,22 @@ const Redirect = () => {
 
     const onClickFriends = {
         script: () => {
-            // Kakao.Picker.selectFriends({
-            //     returnUrl: 'https://developers.kakao.com', // 필수
-            //     title: '친구 선택',
-            //     maxPickableCount: 10,
-            //     minPickableCount: 1,
-            // });
-            // 팝업 방식
             Kakao.Picker.selectFriends({
+                returnUrl: redirectUrl, // 필수
                 title: '친구 선택',
                 maxPickableCount: 10,
                 minPickableCount: 1,
-            }).then((res) => {
-                console.log(res)
-            }).catch((err) => {
-                console.log(err)
-            })
+            });
+            // 팝업 방식
+            // Kakao.Picker.selectFriends({
+            //     title: '친구 선택',
+            //     maxPickableCount: 10,
+            //     minPickableCount: 1,
+            // }).then((res) => {
+            //     console.log(res)
+            // }).catch((err) => {
+            //     console.log(err)
+            // })
         },
         api: () => {
             const userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -95,6 +95,12 @@ const Redirect = () => {
 
                 {JSON.stringify(profile)}
             </p>
+            <p>
+                {
+                    searchParams.get('selected')
+                }
+            </p>
+
         </>
     )
 }
