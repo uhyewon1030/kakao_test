@@ -30,6 +30,7 @@ const Redirect = () => {
         api.getToken(redirectUrl, searchParams.get('code')).then((r) => {
             localStorage.setItem('userInfo', JSON.stringify(r.data))
             setKakaoUserData(r.data)
+            Kakao.Auth.setAccessToken(r.data.access_token);
             getProfile(r.data.access_token)
             console.log(kakaoUserData)
         }).catch((err) => {
